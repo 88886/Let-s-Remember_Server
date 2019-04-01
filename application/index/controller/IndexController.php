@@ -1,0 +1,100 @@
+<?php
+namespace app\index\controller;
+use think\Controller;
+use think\Request;
+use app\common\model\User;
+
+class IndexController extends Controller
+{
+    public function index()
+    {
+        return '';
+    }
+
+    public function login()
+    {
+    	$param = Request::instance()->param();
+		if (!isset($param['username']) ||!isset($param['password']))
+			return ;
+		$username = $param['username'];
+		$password = $param['password'];
+
+		if (User::Login($username, $password))
+		{
+			$user = User::get(session('user_id'));
+
+			echo('<result>1</result>');
+			echo('<user_id>' . $user->getData('user_id') . '</user_id>');
+			echo('<nickname>' . $user->getData('nickname') . '</nickname>');
+			echo('<mobile>' . $user->getData('mobile') . '</mobile>');
+			echo('<email>' . $user->getData('email') . '</email>');
+			echo('<integral>' . $user->getData('integral') . '</integral>');
+			echo('<recite>' . $user->getData('recite') . '</recite>');
+		}
+		else
+		{
+			echo "<result>用户名或密码错误</result>";
+		}
+    }
+
+    public function register()
+	{
+		echo "ndienfiuewnfb";
+		$param = Request::instance()->param();
+		if (!isset($param['username']) ||!isset($param['password']) || !isset($param['nickname']))
+			return '<result>数据出错</result>';
+		$username = $param['username'];
+		$password = $param['password'];
+		$nickname = $param['nickname'];
+
+		if (User::get(['username' => $username]) != null) {
+			return '<result>用户名已存在</result>';
+		}
+		$user = new User;
+		$user->username = $username;
+		$user->password = $password;
+		if (!$user->save()) {
+			return '<result>' . $user->error() . '</result>';
+		}
+		echo "<result>1</result>";
+		echo '<user_id>' . $user->user_id . '</result>';
+	}
+
+	public function logout()
+	{
+		// 这里不需要在后台退出
+	}
+
+	public function updateUserInfo()
+	{
+		$param = Request::instance()->param();
+		$user_id = $param['user_id'];
+		if ($user_id == "") return "<result>无法获取用户ID</result>";
+		$user = User::get($user_id);
+		if (is_null($user))	return "<result>无法获取用户</result>";
+
+		if (isset($param['nickname']))
+			$user->nickname = $param['nickname'];
+
+		if (isset($param['username']))
+			$user->username = $param['username'];
+
+		if (isset($param['password']))
+			$user->password = $param['password'];
+
+		if (isset($param['mobile']))
+			$user->mobile = $param['mobile'];
+
+		if (isset($param['email']))
+			$user->email = $param['email'];
+
+		if (isset($param['recite']))
+			$user->recite = $param['recite'];
+
+		if ($user->isUpdate(true)->save())
+			return "<result>1</result>";
+		else
+			return "</result>". $user->error() . "</result>";
+
+	}
+}
