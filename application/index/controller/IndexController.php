@@ -29,7 +29,9 @@ class IndexController extends Controller
 			echo('<mobile>' . $user->getData('mobile') . '</mobile>');
 			echo('<email>' . $user->getData('email') . '</email>');
 			echo('<integral>' . $user->getData('integral') . '</integral>');
-			echo('<recite>' . $user->getData('recite') . '</recite>');
+			echo('<recite_short>' . $user->getData('recite_short') . '</recite_short>');
+			echo('<recite_middle>' . $user->getData('recite_middle') . '</recite_middle>');
+			echo('<recite_long>' . $user->getData('recite_long') . '</recite_long>');
 		}
 		else
 		{
@@ -88,8 +90,14 @@ class IndexController extends Controller
 		if (isset($param['email']))
 			$user->email = $param['email'];
 
-		if (isset($param['recite']))
-			$user->recite = $param['recite'];
+		if (isset($param['recite_short']))
+			$user->recite_short = $param['recite_short'];
+
+		if (isset($param['recite_middle']))
+			$user->recite_middle = $param['recite_middle'];
+
+		if (isset($param['recite_long']))
+			$user->recite_long = $param['recite_long'];
 
 		if ($user->isUpdate(true)->save())
 			return "<result>1</result>";
