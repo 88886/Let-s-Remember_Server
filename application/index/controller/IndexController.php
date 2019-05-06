@@ -90,6 +90,12 @@ class IndexController extends Controller
 		if (isset($param['email']))
 			$user->email = $param['email'];
 
+		if (isset($param['integral']))
+			$user->integral = $param['integral'];
+
+		// 其实这个应该比大小的（怕点太快网络时延）
+		// 但是一来点太快不算入记住
+		// 二来会被后面的补回来
 		if (isset($param['recite_short']))
 			$user->recite_short = $param['recite_short'];
 
@@ -102,7 +108,7 @@ class IndexController extends Controller
 		if ($user->isUpdate(true)->save())
 			return "<result>1</result>";
 		else
-			return "</result>". $user->error() . "</result>";
+			return "</result>". $this->error() . "</result>";
 
 	}
 }
