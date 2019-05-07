@@ -111,4 +111,20 @@ class IndexController extends Controller
 			return "</result>". $this->error() . "</result>";
 
 	}
+
+	public function getRank()
+	{
+		$User = new User;
+		$users = $User->order('integral desc')->select();
+		// echo sizeof($users);
+		// var_dump($users);
+		foreach ($users as $user) {
+			echo "<USER>";
+			echo '<NAME>' . $user->getData('nickname') . '</NAME>';
+			echo '<INTEGRAL>' . $user->getData('integral') . '</INTEGRAL>';
+			$recite = $user->getData('recite_short') + $user->getData('recite_middle') + $user->getData('recite_long');
+			echo '<RECITE>' . $recite . '</RECITE>';
+			echo "</USER>";
+		}
+	}
 }
