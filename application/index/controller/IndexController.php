@@ -112,6 +112,10 @@ class IndexController extends Controller
 
 	}
 
+	/**
+	 * 所有用户的世界排行榜
+	 * @return [type] [description]
+	 */
 	public function getRank()
 	{
 		$User = new User;
@@ -120,10 +124,13 @@ class IndexController extends Controller
 		// var_dump($users);
 		foreach ($users as $user) {
 			echo "<USER>";
-			echo '<NAME>' . $user->getData('nickname') . '</NAME>';
+			echo '<USER_ID>' . $user->getData('user_id') . '</USER_ID>';
+			echo '<USERNAME>' . $user->getData('username') . '</USERNAME>';
+			echo '<NICKNAME>' . $user->getData('nickname') . '</NICKNAME>';
 			echo '<INTEGRAL>' . $user->getData('integral') . '</INTEGRAL>';
 			$recite = $user->getData('recite_short') + $user->getData('recite_middle') + $user->getData('recite_long');
 			echo '<RECITE>' . $recite . '</RECITE>';
+			echo '<TRPEIN>' . $user->getData('typein') . '</TRPEIN>';
 			echo "</USER>";
 		}
 	}

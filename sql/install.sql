@@ -8,6 +8,7 @@ CREATE TABLE `user` (
 	`mobile` varchar(255) COMMENT '手机号',
 	`email` varchar(255) COMMENT '邮箱',
 	`integral` int(11) DEFAULT 100 COMMENT '积分',
+	`typein` int(11) DEFAULT 0 COMMENT '录入数量',
 	`recite_short` int(11) DEFAULT 0 COMMENT '单词类背诵数量',
 	`recite_middle` int(11) DEFAULT 0 COMMENT '诗歌背诵数量',
 	`recite_long` int(11) DEFAULT 0 COMMENT '长篇背诵数量',
