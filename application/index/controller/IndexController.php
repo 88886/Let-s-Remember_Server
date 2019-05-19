@@ -141,6 +141,9 @@ class IndexController extends Controller
 		$user_id1 = $param['user_id'];
 		$user_id2 = $param['user_id2'];
 
+		if ($user_id1 == $user_id2)
+			return '<result>这是你自己哦</result>';
+
 		$Friend = new Friend;
 		$map = ['user_id1' => $user_id1,
 				'user_id2' => $user_id2];
