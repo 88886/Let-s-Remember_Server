@@ -142,12 +142,21 @@ class IndexController extends Controller
 		$user_id2 = $param['user_id2'];
 
 		$Friend = new Friend;
+		$map = ['user_id1' => $user_id1,
+				'user_id2' => $user_id2];
+		if ($Friend->where($map)->select())
+			return '<result>你们已经是好友了</result>';
+
+
 		$Friend->user_id1 = $user_id1;
 		$Friend->user_id2 = $user_id2;
 		$Friend->save();
 
+		$Friend = new Friend;
 		$Friend->user_id1 = $user_id2;
 		$Friend->user_id2 = $user_id1;
 		$Friend->save();
+
+		echo '<result>添加好友成功</result>';
 	}
 }
