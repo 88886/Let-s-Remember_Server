@@ -3,6 +3,7 @@ namespace app\index\controller;
 use think\Controller;
 use think\Request;
 use app\common\model\User;
+use app\common\model\Friend;
 
 class IndexController extends Controller
 {
@@ -132,5 +133,21 @@ class IndexController extends Controller
 			echo '<TRPEIN>' . $user->getData('typein') . '</TRPEIN>';
 			echo "</USER>";
 		}
+	}
+
+	public function addFriend()
+	{
+		$param = Request::instance()->param();
+		$user_id1 = $param['user_id'];
+		$user_id2 = $param['user_id2'];
+
+		$Friend = new Friend;
+		$Friend->user_id1 = $user_id1;
+		$Friend->user_id2 = $user_id2;
+		$Friend->save();
+
+		$Friend->user_id1 = $user_id2;
+		$Friend->user_id2 = $user_id1;
+		$Friend->save();
 	}
 }
