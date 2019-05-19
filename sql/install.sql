@@ -49,6 +49,15 @@ CREATE TABLE `achieve` (
 	PRIMARY KEY(`achieve_id`)
 )ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+-- 创建好友表
+DROP TABLE IF EXISTS `friend`;
+CREATE TABLE `friend` (
+	`friend_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+	`user_id1` int(11) NOT NULL COMMENT '发起用户ID',
+	`user_id2` int(11) NOT NULL COMMENT '被动用户ID',
+	PRIMARY KEY(`friend_id`)
+)ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 INSERT INTO user (username, password, nickname) values ('user0', '0', '用户0');
 INSERT INTO user (username, password, nickname) values ('user1', '1', '用户1');
 INSERT INTO user (username, password, nickname) values ('user2', '2', '用户2');

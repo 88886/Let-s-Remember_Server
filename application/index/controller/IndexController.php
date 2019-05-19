@@ -109,7 +109,6 @@ class IndexController extends Controller
 			return "<result>1</result>";
 		else
 			return "</result>". $this->error() . "</result>";
-
 	}
 
 	/**
